@@ -42,9 +42,43 @@ public class TaskManager implements TaskMethod {
         }
         else{
             for (int i = 0; i < TaskList.size(); i++) {
-                System.out.println("Task n°"+i+" => "+TaskList.get(i));
+
+                int index= TaskList.indexOf(TaskList.get(i)) == 0 ? 1 : i+1;
+
+                System.out.println("Task n°"+index+" => "+TaskList.get(i));
             }
         }
+    }
+
+    /**
+     * Delete Task
+     */
+
+    public void deleteTaskItem(ArrayList<String> Task){
+       Scanner input = new Scanner(System.in);
+       int id_input;
+
+       if(Task.isEmpty()){
+           System.out.println("Task is empty");
+       }else{
+
+           do{
+               System.out.print("Please give the number of the task to delete ex :1 ? :");
+               id_input=input.nextInt();
+               input.nextLine(); // Vider le buffer...
+
+               if(id_input<0){
+                   System.out.println("id must be greater than 0");
+               }else if (id_input>Task.size()) {
+                   System.out.println("this task ID does not exist");
+               }
+
+           }while(id_input<0 || id_input>Task.size());
+
+           //Delete task by is ID
+           Task.remove(id_input);
+           System.out.println("Task deleted successfully");
+       }
     }
 }
 
